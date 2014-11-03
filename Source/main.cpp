@@ -8,8 +8,6 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
-    app.setWindowIcon(QIcon("qrc:///resources/icon16.png"));
-
 
     return app.exec();
 }
