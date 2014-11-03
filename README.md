@@ -3,15 +3,17 @@ Raintastic
 
 Raintastic is a stylish app to relax and listen to rain sound.
 
+Screenshot
+----------
+![Screenshot for Raintastic](https://raw.githubusercontent.com/Abdeljalil-l/Raintastic/master/Screenshot/snapshot_1.png)
+
 Version
 ----
 
-1.0
+1.1
 
-Tech
+Technical details
 -----------
-
-Dillinger uses a number of open source projects to work properly:
 Raintastic is written in QML (Qt markup language) and some C++
 
 Compiling from source
