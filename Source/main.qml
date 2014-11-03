@@ -3,7 +3,7 @@ import QtQuick.Controls 1.1
 import QtQuick.Window 2.0
 import QtMultimedia 5.0
 import QtGraphicalEffects 1.0
-import "RainQuotes.js" as Quotes
+import "Scripts/RainQuotes.js" as Quotes
 
 ApplicationWindow {
     title: qsTr("Raintastic")
@@ -37,19 +37,17 @@ ApplicationWindow {
             to : 0.0
         }
     }
-    MediaPlayer
+    Audio
     {
         id : sound
-        source: "qrc:///resources/rain.ogv"
+        source: "qrc:///Resources/Media/rain.ogv"
         autoLoad: true
         autoPlay: true
         property bool isPlaying: true
-    }
-
-    Audio
-    {
-        source: sound
-
+        onStatusChanged:
+        {
+            sound.play();
+        }
     }
 
     Rectangle
@@ -58,7 +56,7 @@ ApplicationWindow {
 
         Image
         {
-            source: "qrc:///resources/fiber.jpeg"
+            source: "qrc:///Resources/Bitmap/fiber.jpeg"
         }
 
         Flickable{
@@ -79,7 +77,7 @@ ApplicationWindow {
             Image
             {
                 id: playPauseControl
-                source: "qrc:///resources/pause.png"
+                source: "qrc:///Resources/Control/media-pause.png"
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 MouseArea
@@ -90,13 +88,13 @@ ApplicationWindow {
                         if(sound.isPlaying === true)
                         {
                             sound.pause()
-                            parent.source = "qrc:///resources/play.png"
+                            parent.source = "qrc:///Resources/Control/media-play.png"
                             sound.isPlaying = false
                         }
                         else
                         {
                             sound.play()
-                            parent.source = "qrc:///resources/pause.png"
+                            parent.source = "qrc:///Resources/Control/media-pause.png"
                             sound.isPlaying = true
                         }
                     }
@@ -112,13 +110,31 @@ ApplicationWindow {
                 Image
                 {
                     id: volumeIcon
-                    source: "qrc:///resources/volume.png"
+                    source: "qrc:///Resources/Control/player-volume.png"
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked:
+                        {
+                            if(volumeController.value != 0)
+                            {
+                                volumeController.value = 0;
+                                volumeIcon.source = "qrc:///Resources/Control/player-volume-muted.png";
+                            }
+                            else
+                            {
+                                volumeController.value = 1;
+                                volumeIcon.source = "qrc:///Resources/Control/player-volume.png";
+                            }
+                        }
+                    }
                 }
 
 
             Slider
             {
                 id : volumeController
+                property int lastValue : value
                 maximumValue: 1
                 minimumValue: 0
                 value: sound.volume
@@ -126,6 +142,7 @@ ApplicationWindow {
                 onValueChanged:
                 {
                     sound.volume = value
+                    volumeController.lastValue = value
                 }
             }
         }
@@ -134,7 +151,7 @@ ApplicationWindow {
             {
                 id: refreshButton
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "qrc:///resources/refresh.png"
+                source: "qrc:///Resources/Control/refresh.png"
                 MouseArea
                 {
                     anchors.fill: parent
@@ -165,7 +182,7 @@ ApplicationWindow {
                 id: closeButton
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "qrc:///resources/power.png"
+                source: "qrc:///Resources/Control/program-shutdown.png"
                 MouseArea
                 {
                     anchors.fill: parent
@@ -194,10 +211,15 @@ to relax while listening to rain sound.")
         Image
         {
             id: background
-            source: "qrc:///resources/background.jpg"
+            source: "qrc:///Resources/Bitmap/background.jpg"
             width : parent.width
             height : parent.height
             property bool slided: false
+            Image {
+                id: shadow
+                source: "qrc:///Resources/Bitmap/shadow.png"
+                anchors.right: parent.left
+            }
             Behavior on x
             {
                 NumberAnimation
@@ -207,8 +229,10 @@ to relax while listening to rain sound.")
                 }
             }
 
-            DropShadow
+           /* DropShadow
             {
+                //This drop shadow was replaced with bitmap image
+
                 anchors.fill: background
                 source: background
                 horizontalOffset: -40
@@ -219,14 +243,14 @@ to relax while listening to rain sound.")
                 transparentBorder: true
                 spread: 0.0
                 z: -1
-            }
+            }*/
 
         }
 
         Image
         {
             id: settingsIcon
-            source: "qrc:///resources/settings.png"
+            source: "qrc:///Resources/Control/program-settings.png"
             x : 10
             y : 10
             Behavior on x
