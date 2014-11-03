@@ -1,15 +1,19 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>RainQuotes.js</file>
-        <file>resources/background.jpg</file>
-        <file>resources/fiber.jpeg</file>
-        <file>resources/pause.png</file>
-        <file>resources/play.png</file>
-        <file>resources/power.png</file>
-        <file>resources/rain.ogv</file>
-        <file>resources/refresh.png</file>
-        <file>resources/settings.png</file>
-        <file>resources/volume.png</file>
+        <file>Resources/Bitmap/background.jpg</file>
+        <file>Resources/Bitmap/fiber.jpeg</file>
+        <file>Resources/Bitmap/shadow.png</file>
+        <file>Resources/Control/media-pause.png</file>
+        <file>Resources/Control/media-play.png</file>
+        <file>Resources/Control/media-stop.png</file>
+        <file>Resources/Control/player-volume-muted.png</file>
+        <file>Resources/Control/player-volume.png</file>
+        <file>Resources/Control/program-settings.png</file>
+        <file>Resources/Control/program-shutdown.png</file>
+        <file>Resources/Control/refresh.png</file>
+        <file>Resources/Control/refresh.svg</file>
+        <file>Resources/Media/rain.ogv</file>
+        <file>Scripts/RainQuotes.js</file>
     </qresource>
 </RCC>
